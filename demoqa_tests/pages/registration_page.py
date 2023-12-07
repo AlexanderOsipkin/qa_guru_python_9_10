@@ -12,7 +12,6 @@ class RegistrationPage:
         browser.element('#firstName').should(be.blank).type(user.first_name)
         browser.element('#lastName').should(be.blank).type(user.last_name)
         browser.element('#userEmail').should(be.blank).type(user.user_email)
-        browser.element('#gender-radio-1').double_click()
         if user.user_gender == 'Male':
             browser.element('[for="gender-radio-1"]').double_click()
         elif user.user_gender == "Female":
