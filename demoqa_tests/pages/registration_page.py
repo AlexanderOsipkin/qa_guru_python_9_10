@@ -1,5 +1,5 @@
 from selene import browser, have, be, by
-import os
+from demoqa_tests import resource
 
 
 class RegistrationPage:
@@ -20,8 +20,13 @@ class RegistrationPage:
         browser.element('#userEmail').should(be.blank).type(value)
         return self
 
-    def gender_selection(self):
-        browser.element('#gender-radio-1').double_click()
+    def gender_selection(self, value):
+        if value == "Male":
+            browser.element('[for="gender-radio-1"]').click()
+        elif value == "Female":
+            browser.element('[for="gender-radio-2"]').click()
+        else:
+            browser.element('[for="gender-radio-3"]').click()
         return self
 
     def fill_user_phone_number(self, value):
@@ -42,12 +47,17 @@ class RegistrationPage:
         browser.element('#subjectsInput').should(be.blank).type(value).press_enter()
         return self
 
-    def user_hobby_checkbox(self):
-        browser.element('[for="hobbies-checkbox-1"]').click()
+    def user_hobby_checkbox(self, value):
+        if value == "Sports":
+            browser.element("[for='hobbies-checkbox-1']").click()
+        elif value == "Reading":
+            browser.element("[for='hobbies-checkbox-2']").click()
+        elif value == "Music":
+            browser.element("[for='hobbies-checkbox-3']").click()
         return self
 
     def user_picture(self, value):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(value))
+        browser.element('#uploadPicture').send_keys(resource.path(value))
         return self
 
     def user_current_adress(self, value):
